@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.lvehomap">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permissões -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permissões necessárias -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
 
-    <!-- Features -->
+    <!-- OpenGL ES versão mínima requerida para Google Maps -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.location.network"
-        android:required="true" />
-
-    <!-- Queries para interação com Google Maps -->
-    <queries>
-        <package android:name="com.google.android.apps.maps" />
-    </queries>
 
     <application
         android:allowBackup="true"
@@ -38,45 +22,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-        android:usesCleartextTraffic="false"
         tools:targetApi="31">
 
-        <!-- Google Maps API Key -->
+        <!-- Configuração da chave API do Google Maps -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCjkBjC1iPA0wsYyfSfluFsGyFd-FwQcNw" />
+            android:value="${MAPS_API_KEY}" />
 
-        <!-- Versão do Google Play Services -->
+        <!-- Versão dos serviços Google Play -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!-- Activity Principal -->
+        <!-- Atividade principal -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <!-- FileProvider para compartilhamento -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>

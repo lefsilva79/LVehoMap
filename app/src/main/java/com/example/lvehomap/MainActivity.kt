@@ -80,13 +80,28 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             mMap.isMyLocationEnabled = true
-            getCurrentLocation()
+            centerMapOnCurrentLocation() // Agora só centraliza o mapa
         } else {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
+        }
+    }
+
+    private fun centerMapOnCurrentLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                location?.let {
+                    val currentLatLng = LatLng(it.latitude, it.longitude)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                }
+            }
         }
     }
 
@@ -99,7 +114,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 location?.let {
                     val currentLatLng = LatLng(it.latitude, it.longitude)
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
 
                     // Adiciona o ponto à lista
                     val point = DeliveryPoint(
