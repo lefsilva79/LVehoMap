@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LVehoMap</string>
+    <string name="capture_points">Capturar Pontos</string>
+    <string name="start_navigation">Iniciar Navegação</string>
+    <string name="accessibility_service_description">Este serviço captura os pontos de entrega do Veho para gerar rotas no Google Maps</string>
+</resources>
